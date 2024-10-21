@@ -29,7 +29,10 @@ const productSchema = new mongoose.Schema({
     date: { 
         type: Date, default: Date.now 
     },
-   
+   productGender : {
+    type : String,
+    required : [true , "Gender is Required"]
+   }
 });
 
 const ProductSchema = mongoose.model('ProductSchema',productSchema);

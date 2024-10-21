@@ -1,6 +1,7 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const userRouter = require('./Routers/userRouter.js'); 
+const productRouter = require('./Routers/productsRouter.js')
 const mongoose = require("mongoose");
 const cors = require('cors');
 const app = express();
@@ -13,6 +14,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // Routes
 app.use('/api/v1/user', userRouter);
+app.use("/api/v1/product", productRouter);
 
 app.get('/', (req, res) => {
     res.send('Namaste world');
