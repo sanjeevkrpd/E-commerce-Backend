@@ -1,9 +1,13 @@
 const express = require("express");
-const { allDailyProductsCtrl } = require("../Controllers/productsCtrl");
+const {
+  allDailyProductsCtrl,
+  getProductByIdCtrl
+} = require("../Controllers/productsCtrl");
 const route = express.Router();
 
 
 route.get("/allDailyProducts",allDailyProductsCtrl);
 
+route.get("/:productId",getProductByIdCtrl);
 
 module.exports = route;

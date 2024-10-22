@@ -28,7 +28,44 @@ const allDailyProductsCtrl = async(req,res)=>{
        }
 }
 
+const getProductByIdCtrl = async (req, res) => {
+  try {
+    const id = req.params.id; // Correctly retrieve the ID from params
+
+    if (!id) {
+      // Check if the ID is empty or undefined
+      return res.status(400).send({
+        message: "Bad API Call: ID is required",
+        success: false
+      });
+    }
+
+    const product = await DailyProduct.findById(id); // Directly pass the ID to findById
+
+    if (product) {
+      return res.status(200).send({
+        message: "Product Fetched Successfully",
+        success: true,
+        product
+      });
+    } else {
+      return res.status(404).send({
+        message:
+          "The product that you are looking for is either out of stock or finished.",
+        success: false
+      });
+    }
+  } catch (error) {
+    console.error(error);
+    return res.status(500).send({
+      message: "Internal Server Error. Please try again later. 😢",
+      success: false
+    });
+  }
+};
+
 
 module.exports = {
-    allDailyProductsCtrl
-}
+  allDailyProductsCtrl,
+  getProductByIdCtrl
+};
