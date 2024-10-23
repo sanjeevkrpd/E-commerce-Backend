@@ -30,17 +30,19 @@ const allDailyProductsCtrl = async(req,res)=>{
 
 const getProductByIdCtrl = async (req, res) => {
   try {
-    const id = req.params.id; // Correctly retrieve the ID from params
-
+     const { id } = req.params;  
+    
     if (!id) {
-      // Check if the ID is empty or undefined
+
       return res.status(400).send({
         message: "Bad API Call: ID is required",
         success: false
       });
     }
 
-    const product = await DailyProduct.findById(id); // Directly pass the ID to findById
+    const product = await DailyProduct.findById(id); 
+   
+   
 
     if (product) {
       return res.status(200).send({
